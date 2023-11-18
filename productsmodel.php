@@ -7,7 +7,7 @@ class productsModel{
     }
 
     public function getProducts($id=null){
-        $where = ($id == null) ? "" : " WHERE id='$id'";
+        $where = ($id == null) ? "" : " WHERE id_product='$id'";
         $products=[];
         $sql="SELECT * FROM products ".$where;
         $registos = mysqli_query($this->conexion,$sql);
