@@ -52,31 +52,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         echo json_encode($respuesta);
         break;
-         // Operaciones CRUD para la tabla 'purchases'
-    case 'POST':
-        $_POST = json_decode(file_get_contents('php://input'), true);
-        if (
-            !isset($_POST['id_client']) || empty(trim($_POST['id_client'])) ||
-            !isset($_POST['id_product']) || empty(trim($_POST['id_product'])) ||
-            !isset($_POST['quantity']) || empty(trim($_POST['quantity'])) ||
-            !isset($_POST['total_price']) || empty(trim($_POST['total_price'])) ||
-            !isset($_POST['purchase_date']) || empty(trim($_POST['purchase_date']))
-        ) {
-            $respuesta = ['error', 'Datos de compra incompletos'];
-        } else {
-            $respuesta = $clientsModel->insertPurchase(
-                $_POST['id_client'],
-                $_POST['id_product'],
-                $_POST['quantity'],
-                $_POST['total_price'],
-                $_POST['purchase_date']
-            );
-        }
-        echo json_encode($respuesta);
-        break;
-
-    // Puedes agregar otras operaciones CRUD para 'purchases' según sea necesario
-
+         
     default:
         echo json_encode(['error', 'Método no permitido']);
         break;
