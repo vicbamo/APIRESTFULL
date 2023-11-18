@@ -35,6 +35,19 @@ class PurchaseModel
         return $purchases;
     }
 
+    public function insertPurchase($id_client, $id_product, $quantity, $total_price, $purchase_date)
+    {
+        $query = "INSERT INTO purchases (id_client, id_product, quantity, total_price, purchase_date) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bind_param("iiids", $id_client, $id_product, $quantity, $total_price, $purchase_date);
+
+        if ($stmt->execute()) {
+            return ['success', 'Compra realizada correctamente'];
+        } else {
+            return ['error', 'Error al realizar la compra: ' . $this->conexion->error];
+        }
+    }
+    
     public function updatePurchase($purchaseId, $id_client, $id_product, $quantity, $total_price, $purchase_date)
     {
         $query = "UPDATE purchases SET id_client = ?, id_product = ?, quantity = ?, total_price = ?, purchase_date = ? WHERE id_purchase = ?";

@@ -35,7 +35,7 @@ class productsModel{
             $valida = $this->validateProducts($name,$description,$price);
             $resultado=['error','Ya existe un producto las mismas características'];
             if(count($valida)==0){
-                $sql="UPDATE products SET name='$name',description='$description',price='$price' WHERE id='$id' ";
+                $sql="UPDATE products SET name='$name',description='$description',price='$price' WHERE id_product='$id' ";
                 mysqli_query($this->conexion,$sql);
                 $resultado=['success','Producto actualizado'];
             }
@@ -47,7 +47,7 @@ class productsModel{
         $valida = $this->getProducts($id);
         $resultado=['error','No existe el producto con ID '.$id];
         if(count($valida)>0){
-            $sql="DELETE FROM products WHERE id='$id' ";
+            $sql="DELETE FROM products WHERE id_product='$id' ";
             mysqli_query($this->conexion,$sql);
             $resultado=['success','Producto eliminado'];
         }
